@@ -1,0 +1,11 @@
+1、CAS原理
+三个值：内存值、旧的预期值、修改的新值
+java.util.concurrent.atomic包下的原子操作类都是用CAS实现的
+2、CAS的问题
+a、在并发高的环境下，消耗CPU性能比较高
+b、只能保证单个值的原子操作
+c、ABA问题，即一个值从A->B->A变化
+3、CAS的ABA问题的解决办法
+ABA问题会导致CAS机制在实际应用中出错，解决的办法是加版本号
+比较的时候既比较内存值和旧的预期值，也比较版本号
+在Java当中，AtomicStampedReference类就实现了用版本号做比较的CAS机制
